@@ -1,0 +1,43 @@
+.text1 {
+  font-family:'Oswald' , serif !important;
+  font:   16px/10px Georgia, serif;
+  color: #a1a0a0;
+}
+     
+    .font-white1 {
+      font-family: 'Pridi', serif !important;
+      font-size: 1em !important;
+      color:white !important;
+      font-weight: bold !important;
+    }
+     .font-white12 {
+      font-family: 'Pridi', serif !important;
+      font-size: 1.2em !important;
+      color:white !important;
+
+    }
+    .font-white13 {
+      font-family: 'Pridi', serif !important;
+      font-size: 1.3 em !important;
+      color:white !important;
+
+    }
+    .font-white15 {
+      font-family: 'Pridi', serif !important;
+      font-size: 1.5em !important;
+      color:white !important;
+
+    }
+    .font-bold {
+      font-family: 'Pridi', serif !important;
+      font-size: 1.5em !important;
+      font-style: bold !important;
+      /* color:white !important; */
+
+    }
+    .font08 {
+      font-family: 'Pridi', serif !important;
+      font-size: 0.8em !important;
+      /* color:white !important; */
+
+    }

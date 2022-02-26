@@ -1,0 +1,29 @@
+  
+ 
+    .basic {
+      background-color: #9E9E9E !important;
+    }
+
+    .default {
+      background-color: #F5F5F5 !important;
+    }
+
+    .primary {
+      background-color: #3F51B5 !important;
+    }
+
+    .success {
+      background-color: #4CAF50 !important;
+    }
+    .info {
+      background-color: #2196F3 !important;
+    }
+    .warning {
+      background-color: #FF9800 !important;
+    }
+    .danger {
+      background-color: #F44336 !important;
+    }
+
+  
+    

@@ -1,0 +1,414 @@
+<form id="right">
+  <div ng-show="right">
+    <div ng-show="havereccount" class="align-c">
+      <img class="square" src="app/image/loading.gif" style="width: 100px" />
+      <div class="alert alert-warning">
+        <strong> โปรดรอสักครู่.....</strong>
+      </div>
+    </div>
+    <div ng-cloak>
+      <md-content>
+        <md-tabs md-dynamic-height md-border-bottom class="md-primary">
+          <md-tab label="ordercategory Type">
+            <md-content class="md-padding" layout-xs="column" layout="row">
+              <!-- left -->
+              <div flex-xs flex-gt-xs="60" layout="column">
+                <!-- <md-content class="md-padding"> -->
+                  <div class="conatiner">
+                    <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-7">
+                        <input
+                          class="form-control"
+                          type="file"
+                          id="input"
+                          accept=".xls,.xlsx"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          class="btn btn-primary"
+                          id="button"
+                          ng-click="xlsx2json('#table1')"
+                        >
+                          Show in table
+                        </button>
+                      </div>
+
+                      <div
+                        id="table1"
+                        style="margin-top: 20px; max-height: 80vh;width:57vW;overflow-y:hidden ;overflow-x: hidden"
+                      ></div>
+                    </div>
+
+                    <div class="col-md-6 textalert" style="margin-top: 20px">
+                      {{cc_text}}
+                    </div>
+                  </div>
+                <!-- </md-content> -->
+              </div>
+              <!-- right -->
+              <div flex-xs flex-gt-xs="30" layout="column">
+
+                  <div class="column" ng-if="vm.showadd" style="margin-top: 20px;">
+                    <div >
+                      Name
+                      <input
+
+                        class="form-control"
+                        type="text"
+                        id="inputname"
+                        ng-model="vm.name"
+                      />
+                    </div>
+                    <div >
+                      Description
+                      <input
+                        class="form-control"
+                        type="text"
+                        id="inputdescription"
+                        ng-model="vm.description"
+                      />
+                    </div>
+                    <div flex layout="row">
+                    <div >
+                      <button
+                        class="btn btn-warning"
+                        style="margin-top: 15px;width: 200px;"
+                        id="button"
+                        ng-click="add2ordercattype(vm.name,vm.description)"
+                      >
+                        add to ordercat type
+                      </button>
+                    </div>
+                    <div >
+                      <button
+                        class="btn btn-default"
+                        style="margin-left: 15px;margin-top: 15px;width: 100px;"
+                        id="button"
+                        ng-click="clearvm()"
+                      >
+                        clear
+                      </button>
+                    </div>
+                    <div >
+                      <button
+                        class="btn btn-default"
+                        style="margin-left: 15px;margin-top: 15px;width: 100px;"
+                        id="button"
+                        ng-click="deletejson(vm.name,vm.description)"
+                      >
+                        delete
+                      </button>
+                    </div>
+                  </div>
+                    <div >
+                      <button
+                        class="btn btn-primary"
+                        id="button"
+                        ng-click="save2db('OrderCategoryType')"
+                        style="margin-top: 15px;width: 200px;"
+                      >
+                        save to database
+                      </button>
+                    </div>
+
+                  </div>
+
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="ordercategories">
+            <md-content class="md-padding" layout-xs="column" layout="row">
+              <!-- left -->
+              <div flex-xs flex-gt-xs="70" layout="column">
+                <md-content class="md-padding">
+                  <div class="conatiner mt-5">
+                    <div class="row">
+                      <div class="col-md-2 textheader">ordercat name</div>
+                      <div class="col-md-6">
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="input"
+                          ng-model="vm.ordercat"
+                          autofocus()
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          class="btn btn-primary"
+                          id="button"
+                          ng-click="findordercat(vm.ordercat)"
+                        >
+                          select
+                        </button>
+                      </div>
+                      <div class="col-md-2">
+                        <a
+                          href="../../app/masterdata/OrderCategory.xlsx"
+                          download
+                        >
+                          Download
+                        </a>
+                      </div>
+                    </div>
+                    <div id="mytable"></div>
+                    <!-- style="margin-top: 20; max-height: 70vh; overflow-y: scroll;overflow-x: scroll" -->
+                    <div class="row" ng-if="vm.results.length>0">
+                      <div class="col-md-3">
+                        user
+                        <input
+                          class="form-control bluefield"
+                          type="text"
+                          id="input"
+                          ng-model="vm.loginid"
+                        />
+                      </div>
+                      <div class="col-md-3">
+                        password
+                        <input
+                          class="form-control bluefield"
+                          type="password"
+                          id="input"
+                          ng-model="vm.password"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          class="btn btn-warning"
+                          style="margin-top: 18px"
+                          id="button"
+                          ng-click="save2template(vm.loginid,vm.password)"
+                        >
+                          save to template
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-md-6 textalert" style="margin-top: 20px">
+                      {{cc_text}}
+                    </div>
+                  </div>
+                </md-content>
+              </div>
+              <!-- right -->
+              <div flex-xs flex-gt-xs="30" layout="column">
+                <md-card>
+                  <div id="myData"></div>
+                </md-card>
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="สร้าง favorite ของ chief complaint">
+            <md-content class="md-padding">
+              <div class="conatiner mt-5">
+                <div class="row">
+                  <div class="col-md-2 textheader">chief complaint</div>
+                  <div class="col-md-6">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="input"
+                      ng-model="vm.cc"
+                      autofocus()
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <button
+                      class="btn btn-primary"
+                      id="button"
+                      ng-click="savecc(vm.cc)"
+                    >
+                      select
+                    </button>
+                  </div>
+                </div>
+                <div
+                  id="mytable"
+                  style="margin-top: 20; max-height: 50vh; overflow-y: scroll"
+                ></div>
+                <div class="row" ng-if="vm.results.length>0">
+                  <div class="col-md-3">
+                    user
+                    <input
+                      class="form-control bluefield"
+                      type="text"
+                      id="input"
+                      ng-model="vm.loginid"
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    password
+                    <input
+                      class="form-control bluefield"
+                      type="password"
+                      id="input"
+                      ng-model="vm.password"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <button
+                      class="btn btn-warning"
+                      style="margin-top: 18px"
+                      id="button"
+                      ng-click="save2template(vm.loginid,vm.password)"
+                    >
+                      save to template
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 textalert" style="margin-top: 20px">
+                  {{cc_text}}
+                </div>
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="สร้าง note template">
+            <md-content class="md-padding">
+              <div class="conatiner mt-5">
+                <div class="column">
+                  <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2 textheader">note template name :</div>
+                    <div class="col-md-8">
+                      <input
+                        class="form-control"
+                        type="text"
+                        id="input"
+                        ng-model="vm.notename"
+                        autofocus()
+                      />
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top: 15px">
+                    <div class="column col-md-4">
+                      <div class="textheader">note template type :</div>
+                      <div flex layout="column">
+                        <label
+                          ng-repeat="item in notetype"
+                          class=""
+                          ng-show="item.show==true"
+                        >
+                          <input
+                            type="radio"
+                            name="mnotetype"
+                            ng-model="vm.notetype"
+                            value="{{item._id}}"
+                          />{{item.valuedescription}}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="column col-md-8">
+                      <div class="textheader">note template detail :</div>
+                      <div class="shadow-textarea">
+                        <textarea
+                          class="form-control z-depth-1"
+                          id="exampleFormControlTextarea6"
+                          rows="14"
+                          placeholder="input note here..."
+                          ng-model="vm.notedetail"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="padding-top: 20px">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-1">user</div>
+                  <div class="col-md-2">
+                    <input
+                      class="form-control bluefield"
+                      type="text"
+                      id="input"
+                      ng-model="vm.loginid"
+                    />
+                  </div>
+                  <div class="col-md-1">password</div>
+                  <div class="col-md-2">
+                    <input
+                      class="form-control bluefield"
+                      type="password"
+                      id="input"
+                      ng-model="vm.password"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <button
+                      class="btn btn-warning"
+                      id="button"
+                      ng-click="savenote(vm.loginid,vm.password,vm.notename,vm.notetype,vm.notedetail)"
+                    >
+                      save to note template
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 textalert" style="margin-top: 20px">
+                  {{note_text}}
+                </div>
+              </div>
+            </md-content>
+          </md-tab>
+
+          <!-- <md-tab label="xlsx2json">
+            <md-content class="md-padding">
+              <div class="conatiner mt-5">
+                <div class="row">
+
+                  <div class="col-md-3"></div>
+                  <div class="col-md-3">
+                    <input class="form-control" type="file" id="input" accept=".xls,.xlsx">
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-primary" id="button" ng-click="xlsx2json()">Show in table</button>
+                  </div>
+                  <div id="mytable" style="margin-top:0;max-height:50vH;overflow-y:scroll;">
+                  </div>
+                </div>
+              </div>
+
+            </md-content>
+          </md-tab>
+          <md-tab label="CCHPI">
+            <md-content class="md-padding">
+              <div class="conatiner mt-5">
+                <div class="row">
+                  <div class="col-md-2">
+                    <button class="btn btn-primary" id="button" ng-click="mongo2table('favouritecchpis')">Show in
+                      table</button>
+                  </div>
+                  <div ng-if="vm.results && vm.results.length > 0" class="col-sm-5" flex layout="row"
+                    style="justify-content:flex-end;">
+                    <md-select ng-model="vm.selectedDownload" class="md-no-underline nomargin md-select-radius"
+                      ng-change="downloadTypeChange(vm.selectedDownload)">
+                      <md-option ng-repeat="fileType in vm.downloadSupports" ng-value="fileType"
+                        ng-selected="fileType === vm.selectedDownload ? true: false">
+                        {{fileType}}
+                      </md-option>
+                    </md-select>
+
+                    <button class="btn btn-default" id="button1" ng-click="downloadFile(vm.selectedDownload)"
+                      style="width: 60px;height:40px;">
+                      <img src="../../app/image/download.png" alt="" style="width: 30px;">
+                    </button>
+                    <button class="btn btn-default" id="button2" ng-click="printFile()"
+                      style="width: 60px;height:40px;">
+                      <img src="../../app/image/print.png" alt="" style="width: 30px;">
+                    </button>
+                  </div>
+                </div>
+                <div id="table_mongo2table" style="margin-top:0;max-height:50vH;overflow-y:scroll;">
+                </div>
+            </md-content>
+          </md-tab> -->
+
+          <!-- <md-tab label="HOME" ng-click="gohome()"> -->
+          <!-- <md-button class="btn btn-default" ng-click="gohome()" title="home">
+                  <img src="app/image/home.png" width="30px" alt="setup" />
+                </md-button> -->
+          <!-- </md-tab> -->
+        </md-tabs>
+      </md-content>
+    </div>
+  </div>
+</form>

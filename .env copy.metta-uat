@@ -1,0 +1,1 @@
+MONGODB_CONNECTION=mongodb://metta-uat:Centric%40123!@45.127.62.110:27021,45.127.62.109:27022,45.127.62.103:27023/centrixdb?replicaSet=rs0

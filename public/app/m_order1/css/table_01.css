@@ -1,0 +1,70 @@
+  
+  .tablefull {
+      border-collapse: collapse;
+      padding: 0px !important;
+      margin-top: 0px !important;
+      display: block;
+      min-height: 950vH;
+      max-height: 95vH;
+      width: 95%;
+      overflow-y: scroll;
+          /* display: block; */
+      /* max-width: 100% !important; */
+
+    }
+
+    .tablefull  th {
+      border-bottom: 0px solid transparent;
+      background-color: #828282;
+      width: 350px !important;
+    }
+
+    .tablefull  td {
+      padding: 0px !important;
+      background-color: #c7c7c7;
+    }
+
+    a:hover {
+      color: white;
+    }
+
+    a:link {
+      color: whitesmoke;
+      text-decoration: none;
+    }
+
+    a:active {
+      color: yellow;
+    }
+
+    a:visited {
+      color: rgb(236, 233, 233);
+    }
+    .table95 {
+      width: 95%;
+      text-align: center;
+      border: 0px solid #BFBFBF;
+      border-collapse: collapse;
+      padding: 10px 10px 15px 10px;
+      /* padding: 0px !important; */
+      margin-top: 0px !important;
+      /* display: block; */
+      /* min-height: 30vH;
+      max-height: 30vH; */
+      /* overflow-y: scroll; */
+    }
+
+    /* table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  } */
+
+    .tablecollapse {
+      border: 1px solid rgb(15, 5, 5);
+      border-collapse: collapse;
+      padding: 10px 10px 15px 10px;
+      padding: 0px !important;
+      margin-top: 0px !important;
+      display: block;
+      /* overflow-y: scroll; */
+    }

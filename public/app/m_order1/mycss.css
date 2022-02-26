@@ -1,0 +1,130 @@
+.d1 {
+  width: 98%;
+  min-height: 98vH;
+  max-height: 98vH;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  /* border:solid 1px gray; */
+  margin-left: 3px;
+  text-align: left;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.heightitlemenu {
+  min-height: 20px;
+  max-height: 20px;
+} 
+.width100 {
+  display: flex;
+  justify-content: center;
+  /* min-width: 98%;
+  max-width: 98%; */
+  min-width: 160px;
+  max-width: 160px;
+}
+.width350 {
+  /* display: block; */
+  min-width: 350px;
+  max-width: 350px;
+}
+.width250 {
+  /* display: block; */
+  min-width: 250px;
+  max-width: 250px;
+}
+.width600 {
+  /* display: block; */
+  min-width: 600px;
+  max-width: 600px;
+}
+.marginleft15 {
+  margin-left: 15px;
+}
+.size50 {
+  display: flex;
+  justify-content: center;
+  margin-top: -5px!important;
+  min-width: 50px;
+  max-width: 50px;
+  min-height:30px;
+  max-height: 30px;
+  padding-top: 1px;
+  padding-right: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+}
+.heigh70 {
+  min-height:60%;
+  max-height: 60%;
+  padding-top: 1px;
+  padding-right: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+
+}
+
+.div_show {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  /* border:solid 1px gray; */
+
+  box-shadow: 2px 2px 2px 2px #888888;
+  margin-right: 2px;
+  margin-left: 2px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-right: 80px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
+
+.align-c {
+  text-align: center !important;
+}
+.align-l {
+  text-align: left !important;
+}
+.align-r {
+  text-align: right !important;
+}
+
+.collapse {
+  /* text-align: center; */
+  border: 0px solid #BFBFBF;
+  border-collapse: collapse;
+  padding: 10px 10px 15px 10px;
+  padding: 0px !important;
+  margin-top: 0px !important;
+  display: block;
+  /* min-height: 35vH;
+  max-height: 35vH; */
+  /* overflow-y: scroll; */
+}
+
+
+.pad-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.textalert {
+
+  font-family: Tahoma !important;
+  font-size: 1.5vW !important;
+  font-weight: bold !important;
+  color: rgb(150, 16, 16);
+  text-align: center;
+}
+.textheader {
+  font-family: Tahoma !important;
+  font-size: 1.2vW !important;
+  font-weight: bold !important;
+  color: rgb(43, 16, 165);
+}
+.bluefield {
+  background-color: #33aec4f0;
+}
