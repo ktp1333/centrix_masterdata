@@ -25,10 +25,12 @@ module.exports = function (app) {
     app.post('/centrix_master/updatesubordercat', centrix_master.updatesubordercat);
     app.post('/centrix_master/delete_data', centrix_master.delete_data);
 
-    var importdata = require('./insert.js');
-    app.post('/importdata/insertpt', importdata.insertpt);
-    app.post('/importdata/insertfile', importdata.insertfile);
-
+    // var importdata = require('./insert.js');
+    // app.post('/importdata/insertpt', importdata.insertpt);
+    // app.post('/importdata/insertfile', importdata.insertfile);
+    var insert_ordercategory = require('./insert_ordercategory.js');
+    app.post('/insert_ordercategory/insertpt', insert_ordercategory.insertpt);
+    app.post('/insert_ordercategory/insertfile', insert_ordercategory.insertfile);
     var local_host = require('./local_host.route.js');
     app.post('/local_host/readmongo', local_host.readmongo);
     app.post('/local_host/save_newcommand', local_host.save_newcommand);

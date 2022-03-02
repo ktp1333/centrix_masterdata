@@ -74,8 +74,8 @@ app.controller(
         $scope.orguid = globalSetting.setting.orguid[orgSite];
         $scope.iip = globalSetting.setting.url[orgSite];
         console.log($scope.orguid);
-        masterdetail("OrderCategoryType", 1);
-        masterdetail("BillingType", 2);
+        // masterdetail("OrderCategoryType", 1);
+        // masterdetail("BillingType", 2);
         // adjustCollection("SubCategory");
       });
     }
@@ -138,7 +138,7 @@ app.controller(
     function save2db() {
       mdata = vm.results;
       $http
-        .post("/importdata/insertpt", {
+        .post("/insert_ordercategory/insertpt", {
           filename: $scope.filename,
           jsondata: mdata,
         })
@@ -147,7 +147,9 @@ app.controller(
     }
     function showcollection() {
       $http
-        .post("/centrix_master/list_collection", {})
+        .post("/centrix_master/list_collection", {
+          mcollection: "ordercategory",
+        })
         .success(function (response) {
           vm.results2 = response.data;
 
@@ -229,6 +231,8 @@ app.controller(
       vm.table = new Tabulator(mtable3, tableSetting3);
     }
     function adjustCollection(mfile) {
+      masterdetail("OrderCategoryType", 1);
+      masterdetail("BillingType", 2);
       console.log("mfile", vm.mfile);
       $http
         .post("/centrix_master/collection_detail", {
@@ -734,7 +738,7 @@ app.controller(
 
     function migrate(mfile, mdata) {
       $http
-        .post("/importdata/insertfile", {
+        .post("/insert_ordercategory/insertfile", {
           mfile: mfile,
           jsondata: mdata,
         })

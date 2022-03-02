@@ -6,7 +6,7 @@ var async = require("async");
 // var md5 = require('md5');
 var _ = require("underscore");
 var dbpath = require("../config/db").dbpath;
-var localdb = require("../config/db").localdb;
+var localdb = require("../config/db").local_ordercategory;
 
 exports.find_ordercategories = function (req, res) {
   MongoClient.connect(dbpath, function (err, db) {
@@ -337,9 +337,10 @@ exports.list_dbdetail = function (req, res) {
   });
 };
 exports.list_collection = function (req, res) {
+
   MongoClient.connect(localdb)
     .then((client) => {
-      const connect = client.db("masterdata");
+      const connect = client.db(req.body.mcollection);
       connect.listCollections().toArray(function (err, docs) {
         if (!err) {
           console.log(docs);
