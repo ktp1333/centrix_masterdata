@@ -13,6 +13,9 @@ module.exports = function (app) {
     var security = require('./utils/security');
     app.get('/security/login/:username/:shake128/:md5?', security.login);
 
+    var centrix = require('./centrix.route.js');
+    app.post('/centrix/list_collection', centrix.list_collection);
+    // app.post('/centrix/find_detail', centrix.find_detail);
 
 
     var centrix_master = require('./centrix_master.route.js');
@@ -25,9 +28,9 @@ module.exports = function (app) {
     app.post('/centrix_master/updatesubordercat', centrix_master.updatesubordercat);
     app.post('/centrix_master/delete_data', centrix_master.delete_data);
 
-    // var importdata = require('./insert.js');
-    // app.post('/importdata/insertpt', importdata.insertpt);
-    // app.post('/importdata/insertfile', importdata.insertfile);
+    var insert = require('./insert.js');
+    app.post('/insert/insertpt', insert.insertpt);
+    app.post('/insert/insertfile', insert.insertfile);
     var insert_ordercategory = require('./insert_ordercategory.js');
     app.post('/insert_ordercategory/insertpt', insert_ordercategory.insertpt);
     app.post('/insert_ordercategory/insertfile', insert_ordercategory.insertfile);

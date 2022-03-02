@@ -9,85 +9,29 @@ var md5 = require('md5');
 // pass: "incus@123",
 // var dbpath = 'mongodb://incusdba:incus%40123@192.168.9.22,192.168.9.23,192.168.9.24/arcusairdb?authMechanism=SCRAM-SHA-1&authSource=arcusairdb';
 // var dbpath = 'mongodb://centrix:abc%40123@demo.humancentric.info/centrixdb';
-var dbpath = require('../config/db').dbpath;
+var dbpath = require('../config/db').centrix_dev;
 
-exports.singleID_natID = function (req, res) {
-    // var mongoose = require('mongoose')
+
+exports.list_collection = function (req, res) {
 
     MongoClient.connect(dbpath, (connectErr, db) => {
         var dbo = db;
-        dbo.collection("patients").aggregate([{
+        dbo.collection(req.body.mcollection).aggregate([{
                 $match: {
                     "statusflag": "A",
-                    nationalid: req.body.nationalid,
                 }
             },
-            {
-                $lookup: {
-                    from: "referencevalues",
-                    foreignField: "_id",
-                    localField: "titleuid",
-                    as: "titleuid"
-                }
-            },
-            {
-                $lookup: {
-                    from: "referencevalues",
-                    foreignField: "_id",
-                    localField: "genderuid",
-                    as: "genderuid"
-                }
-            },
-            {
-                $lookup: {
-                    from: "referencevalues",
-                    foreignField: "_id",
-                    localField: "religionuid",
-                    as: "religionuid"
-                }
-            },
-            {
-                $lookup: {
-                    from: "organisations",
-                    foreignField: "_id",
-                    localField: "orguid",
-                    as: "orguid"
-                }
-            },
-            {
-                $lookup: {
-                    from: "patientimages",
-                    foreignField: "_id",
-                    localField: "patientimageuid",
-                    as: "patientimageuid"
-                }
-            },
-            {
-                $lookup: {
-                    from: "patientvisits",
-                    foreignField: "patientuid",
-                    localField: "_id",
-                    as: "patientvisits"
-                }
-            },
-            {
-                "$unwind": {
-                    path: "$patientvisits",
-                    preserveNullAndEmptyArrays: true
-                }
-            },
-            // {
-            //     "$unwind": { path: "$patientimageuid", preserveNullAndEmptyArrays: true }
-            // },
+          
         ]).toArray((err, docs) => {
             console.log(docs);
             res.status(200).json({
-                patient: docs
+                data: docs
             });
             db.close();
         });
     });
 }
+//------------------------------------
 exports.singleID_hn = function (req, res) {
     // var mongoose = require('mongoose')
 

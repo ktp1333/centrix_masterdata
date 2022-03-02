@@ -4,10 +4,16 @@ var moment = require('moment');
 var mongoose = require('mongoose');
 var async = require('async');
 var _ = require('underscore');
-var localdb = require('../config/db').local_ordercategory;
+
+
 
 
 exports.insertpt = function (req, res) {
+  if (req.body.module=='orderitem') {
+    var localdb = require('../config/db').local_orderitem;
+  } else {
+    
+  }
   MongoClient.connect(localdb, function (err, db) {
     if (err) throw err;
     var dbo = db;
@@ -22,6 +28,11 @@ exports.insertpt = function (req, res) {
 }
 
 exports.insertfile = function (req, res) {
+  if (req.body.module=='orderitem') {
+    var localdb = require('../config/db').local_orderitem;
+  } else {
+    
+  }
   var defer = q.defer();
   var mfile=req.body.mfile;
   MongoClient.connect(localdb, function (err, db) {

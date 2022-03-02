@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body style="background-color: white;">
+  <form name="myForm" id="menu_form" class="form-horizontal align-c" role="form">
+    <div layout="column" style="height: auto !important;" ng-cloak>
+      <section layout="row" flex>
+        <md-sidenav class="bgcolor50 width350" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+          <md-toolbar class="md-theme-indigo ">
+            <h1 class="md-toolbar-tools ">
+              <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleLeft()">
+                <md-icon ng-bind="'fast_rewind'"></md-icon>
+              </md-button>
+              <p>
+                <!-- <button type="text" class="btn btn-primary " ng-click="addnewpatient()">
+                  <span class="glyphicon glyphicon-floppy-save"></span>
+                </button> -->
+              </p>
+            </h1>
+          </md-toolbar>
+          <form name="myForm" id="rightform" class="form-horizontal " role="form">
+            <!-- <md-content flex layout-padding>
+              <input type="date" class="form-control width100  align-c" id="datepicger" ng-model="dtp.value" min="2016-01-01" required
+              />
+              <input type="text" name="tdate" class="form-control align-c" value="{{dtp.value}}" ng-hide="true" />
+            </md-content>
+            <md-content flex layout-padding>
+              <input type="date" class="form-control width100  align-c" id="datepicger2" ng-model="dtp2.value" min="2016-01-01" required
+              />
+              <input type="text" name="tdate2" class="form-control align-c" value="{{dtp2.value}}" ng-hide="true" />
+            </md-content>
+            <md-content flex layout-padding class="bgcolor500 ">
+              bill amount more than :
+              <input type="text" name="search" class="form-control width-200" placeholder="search value" ng-model="search_query" value=""
+                autofocus />
+            </md-content> -->
+
+            <!-- <div align="center">
+              <button class="btn btn-basic" ng-click="selectdata(dtp.value,false,dtp2.value,search_query)" title="OPD">OPD</button>
+              <button class="btn btn-basic" ng-click="selectdata(dtp.value,true,dtp2.value,0)" title="IPD">IPD</button> -->
+
+            <!-- <button class="btn btn-basic" ng-click="selectalldata(dtp.value,,dtp2.value)" title="ALL">ALL</button> -->
+            <!-- </div> -->
+            <!-- <Br>
+            <div class="container" ng-if="menu">
+              <md-progress-linear md-mode="query"></md-progress-linear>
+            </div> -->
+
+            <!-- <md-button class="md-raised " ng-click="selectdate(dtp.value)" title="Show" style="width:180px;">Choose</md-button> -->
+            <div class="panel-heading" flex layout="column">
+              <button type="text" class="btn btn-default " ng-click="header1()">
+                {{txt_header1}}
+              </button>
+              <button type="text" class="btn btn-default " ng-click="header2()">
+                {{txt_header2}}
+              </button>
+            </div>
+          </form>
+        </md-sidenav>
+        <md-content flex layout-padding>
+          <div layout="row" layout-align="top left" class="heightitlemenu">
+            <span class="glyphicon glyphicon-forward" ng-click="refreshmenu()"> </span>
+            <div class="marginleft15">{{text_header}}</div>
+            <!-- <md-button  class="md-raised" style="width:120px;">
+                <a href="/index_p5#?ward={{warddesc}}" target="_blank" class="w3-button w3-teal w3-border w3-round-large " style="width:120px;"
+                  role="button">ur</a>
+              </md-button> -->
+          </div>
+        </md-content>
+      </section>
+    </div>
+  </form>
+
+</body>
+
+</html>
