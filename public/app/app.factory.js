@@ -76,6 +76,11 @@
                 METTA: "http://192.168.20.19:30030/",      
                 METTAUAT: 'http://192.168.30.12:30030/',      
             },
+            // Local_DB:{
+            //     orderitem:"mongodb://localhost:27017/orderitem",  
+            //     ordercategory: "mongodb://localhost:27017/ordercategory",     
+            // },
+
         }
 
 

@@ -85,6 +85,9 @@ app.get('/mor', function (req, res) {
 app.get('/moi', function (req, res) {
     res.sendFile(__dirname + "/public/app/m_orderitem/index.html");
 })
+app.get('/mmt', function (req, res) {
+    res.sendFile(__dirname + "/public/app/m_master/index.html");
+})
 // app.use('*',function(req,res,next){
 //     var utcOffset = 420;
 //     if (req.body.fromdate) {

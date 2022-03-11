@@ -16,17 +16,26 @@ module.exports = function (app) {
     var centrix = require('./centrix.route.js');
     app.post('/centrix/list_collection', centrix.list_collection);
     // app.post('/centrix/find_detail', centrix.find_detail);
-
-
-    var centrix_master = require('./centrix_master.route.js');
-    app.post('/centrix_master/list_ordercategories', centrix_master.list_ordercategories);
-    app.post('/centrix_master/find_detail', centrix_master.find_detail);
-    app.post('/centrix_master/find_ordercategories', centrix_master.find_ordercategories);
-    app.post('/centrix_master/list_collection', centrix_master.list_collection);
-    app.post('/centrix_master/collection_detail', centrix_master.collection_detail);
-    app.post('/centrix_master/updateordercat', centrix_master.updateordercat);
-    app.post('/centrix_master/updatesubordercat', centrix_master.updatesubordercat);
-    app.post('/centrix_master/delete_data', centrix_master.delete_data);
+    var local_data = require('./local_data.route.js');
+    app.post('/local_data/list_ordercategories', local_data.list_ordercategories);
+    app.post('/local_data/find_detail', local_data.find_detail);
+    app.post('/local_data/find_ordercategories', local_data.find_ordercategories);
+    app.post('/local_data/list_collection', local_data.list_collection);
+    app.post('/local_data/collection_detail', local_data.collection_detail);
+    app.post('/local_data/updateordercat', local_data.updateordercat);
+    app.post('/local_data/updatesubordercat', local_data.updatesubordercat);
+    app.post('/local_data/delete_data', local_data.delete_data);
+    app.post('/local_data/collection_ana_code', local_data.collection_ana_code);
+    app.post('/local_data/collection_ana_name', local_data.collection_ana_name);
+    // var centrix_master = require('./centrix_master.route.js');
+    // app.post('/centrix_master/list_ordercategories', centrix_master.list_ordercategories);
+    // app.post('/centrix_master/find_detail', centrix_master.find_detail);
+    // app.post('/centrix_master/find_ordercategories', centrix_master.find_ordercategories);
+    // app.post('/centrix_master/list_collection', centrix_master.list_collection);
+    // app.post('/centrix_master/collection_detail', centrix_master.collection_detail);
+    // app.post('/centrix_master/updateordercat', centrix_master.updateordercat);
+    // app.post('/centrix_master/updatesubordercat', centrix_master.updatesubordercat);
+    // app.post('/centrix_master/delete_data', centrix_master.delete_data);
 
     var insert = require('./insert.js');
     app.post('/insert/insertpt', insert.insertpt);

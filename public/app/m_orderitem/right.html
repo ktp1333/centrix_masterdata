@@ -20,8 +20,8 @@
                 </ul>
               </div>
               <!-- right -->
-              <div flex-xs flex-gt-xs="80" layout="column">
-                <div flex layout="row">
+              <div flex-xs flex-gt-xs="80" layout="column" style="margin-top: 20px;margin-left: 20px;">
+                <div flex layout="row" >
                 <div>{{vm.mfile}} {{itemcount}}</div>
                 <div ng-if="itemcount != ''" class="col-sm-5" flex layout="row" style="justify-content:flex-end;">
                   <md-select ng-model="vm.selectedDownload" class="md-no-underline nomargin md-select-radius"
@@ -79,8 +79,8 @@
                 <!-- </md-content> -->
               </div>
               <!-- right -->
-              <div flex-xs flex-gt-xs="30" layout="column">
-                <div class="column" ng-if="vm.showadd" style="margin-top: 20px">
+              <div flex-xs flex-gt-xs="30" layout="column" >
+                <div class="column" ng-if="vm.showadd" style="margin-top: 20px;margin-left: 20px;">
                   <div>
                     <button class="btn btn-primary" id="button" ng-click="save2db()"
                       style="margin-top: 15px; width: 200px">
@@ -137,7 +137,7 @@
               </div>
             </md-content>
           </md-tab>
-          <md-tab label="adjust OrderCategory" ng-click="adjustCollection('OrderCategory')">
+          <md-tab label="adjust OrderItem" ng-click="adjustCollection('Orderitem')">
             <md-content class="md-padding" layout-xs="column" layout="row">
               <!-- left -->
               <div flex-xs flex-gt-xs="60" layout="column">
@@ -242,129 +242,7 @@
               </div>
             </md-content>
           </md-tab>
-          <md-tab label="adjust SubCategory" ng-click="module_subcat('SubCategory')">
-            <md-content class="md-padding" layout-xs="column" layout="row">
-              <!-- left -->
-              <div flex-xs flex-gt-xs="60" layout="column">
-                <!-- <md-content class="md-padding"> -->
-                <div class="conatiner">
-                  <div class="row">
-                    <div class="col-md-2"></div>
-                    <div id="table5" style="
-                        margin-top: 20px;
-                        max-height: 80vh;
-                        width: 57vw;
-                        overflow-y: hidden;
-                        overflow-x: hidden;
-                      "></div>
-                  </div>
-                </div>
-                <!-- </md-content> -->
-              </div>
-              <!-- right -->
-              <div flex-xs flex-gt-xs="30" layout="column">
-                <form>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="text1" aria-describedby="" placeholder="code"
-                      ng-model="vm.item.CODE" />
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="text2" aria-describedby="" placeholder="name"
-                      ng-model="vm.item.NAME" />
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="text3" aria-describedby="" placeholder="DESCRIPTION"
-                      ng-model="vm.item.DESCRIPTION" />
-                  </div>
-                  <!-- <md-radio-group ng-model="vm.item.ISSUBCATEGORY" layout="row"
-                  style="margin-top: 20px"> ISSUBCATEGORY...
-                    <md-radio-button value="true">true</md-radio-button>
-                    <md-radio-button value="false" class="md-primary"
-                      >false</md-radio-button
-                    >
-                  </md-radio-group> -->
-                  <div flex-xs flex-gt-xs="30" layout="column" style="margin-top: 20px">
-                    <md-card>
-                      <div class="">
-                        <md-input-container flex style="width: 100%">
-                          <label>PARENTCATEGORY NAME</label>
 
-                          <md-select ng-model="vm.item.PARENTCATEGORYNAME">
-                            <md-option ng-repeat="value in ordercat  | orderBy:'NAME'" ng-selected="data === value.NAME"
-                              value="{{ value.NAME }}">
-                              {{ value.NAME }}
-                            </md-option>
-                          </md-select>
-                        </md-input-container>
-                      </div>
-                    </md-card>
-                  </div>
-                  <div flex-xs flex-gt-xs="30" layout="column" style="margin-top: 20px">
-                    <md-card>
-                      <div class="">
-                        <md-input-container flex style="width: 100%">
-                          <label>ORDERCATEGORY TYPE</label>
-
-                          <md-select ng-model="vm.item.ORDERCATEGORYTYPE">
-                            <md-option ng-repeat="value in ordercategorytype  | orderBy:'NAME'"
-                              ng-selected="data === value.NAME" value="{{ value.NAME }}">
-                              {{ value.NAME }}
-                            </md-option>
-                          </md-select>
-                        </md-input-container>
-                      </div>
-                    </md-card>
-                  </div>
-                  <div flex-xs flex-gt-xs="30" layout="column" style="padding-top: 0">
-                    <md-card>
-                      <div class="">
-                        <md-input-container flex style="width: 100%">
-                          <label>BILLING TYPE</label>
-
-                          <md-select ng-model="vm.item.BILLINGTYPE">
-                            <md-option ng-repeat="value in billingtype | orderBy:'NAME'"
-                              ng-selected="data === value.NAME" value="{{ value.NAME }}">
-                              {{ value.NAME }}
-                            </md-option>
-                          </md-select>
-                        </md-input-container>
-                      </div>
-                    </md-card>
-                  </div>
-                  <div flex layout="row">
-                    <button type="submit" class="btn btn-primary width100"
-                      ng-click="editsubordercat(vm.item._id,vm.item.CODE,vm.item.NAME,vm.item.DESCRIPTION,vm.item.ORDERCATEGORYTYPE,vm.item.BILLINGTYPE,vm.item.PARENTCATEGORYNAME)">
-                      EDIT
-                    </button>
-                    <button type="submit" class="btn btn-primary width100"
-                      ng-click="editsubordercat('',vm.item.CODE,vm.item.NAME,vm.item.DESCRIPTION,vm.item.ORDERCATEGORYTYPE,vm.item.BILLINGTYPE,vm.item.PARENTCATEGORYNAME)">
-                      NEW
-                    </button>
-                    <button type="submit" class="btn btn-primary width100" ng-click="deletesubordercat(vm.item._id)">
-                      DELETE
-                    </button>
-                  </div>
-                  <div ng-show="vm.processing" class="align-c">
-                    <img class="square" src="app/image/loading.gif" style="width: 100px" />
-                    <div class="alert alert-warning">
-                      <strong> โปรดรอสักครู่.....</strong>
-                    </div>
-                  </div>
-                </form>
-                <div class="column" ng-if="vm.showadd" style="margin-top: 20px">
-                  <div>
-                    <button class="btn btn-primary" id="button" ng-click="save2db()"
-                      style="margin-top: 15px; width: 200px">
-                      save to database
-                    </button>
-                  </div>
-                  <div class="textalert" style="margin-top: 20px">
-                    {{notice}}
-                  </div>
-                </div>
-              </div>
-            </md-content>
-          </md-tab>
 
         </md-tabs>
       </md-content>

@@ -5,16 +5,13 @@ var mongoose = require('mongoose');
 var async = require('async');
 var _ = require('underscore');
 
-
-
-
 exports.insertpt = function (req, res) {
-  if (req.body.module=='orderitem') {
-    var localdb = require('../config/db').local_orderitem;
-  } else {
+  // if (req.body.module=='orderitem') {
+  //   var localdb = require('../config/db').local_orderitem;
+  // } else {
     
-  }
-  MongoClient.connect(localdb, function (err, db) {
+  // }
+  MongoClient.connect(req.body.localdb, function (err, db) {
     if (err) throw err;
     var dbo = db;
     var myobj = req.body.jsondata;
@@ -28,14 +25,10 @@ exports.insertpt = function (req, res) {
 }
 
 exports.insertfile = function (req, res) {
-  if (req.body.module=='orderitem') {
-    var localdb = require('../config/db').local_orderitem;
-  } else {
-    
-  }
+
   var defer = q.defer();
   var mfile=req.body.mfile;
-  MongoClient.connect(localdb, function (err, db) {
+  MongoClient.connect(req.body.localdb, function (err, db) {
     if (err) console.log(err);
     var dbo = db;
     var myobj = req.body.jsondata;
@@ -53,7 +46,7 @@ exports.insertfile = function (req, res) {
 exports.insertfile_back = function (req, res) {
   var defer = q.defer();
   var mfile=req.body.mfile;
-  MongoClient.connect(localdb, function (err, db) {
+  MongoClient.connect(req.body.localdb, function (err, db) {
     if (err) console.log(err);
     var dbo = db;
     var myobj = req.body.jsondata;

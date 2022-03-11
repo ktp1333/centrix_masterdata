@@ -1,6 +1,6 @@
 module.exports = {
-  local_ordercategory: "mongodb://localhost:27017/ordercategory",
-  local_orderitem: "mongodb://localhost:27017/orderitem",
+  // local_ordercategory: "mongodb://localhost:27017/ordercategory",
+  // local_orderitem: "mongodb://localhost:27017/orderitem",
   // dbpath: 'mongodb://centrix:abc%40123@demo.humancentric.info/centrixdb',
   dbpath: process.env.MONGODB_CONNECTION,
   local_json: "../centrix_masterdata/app/datajson/",

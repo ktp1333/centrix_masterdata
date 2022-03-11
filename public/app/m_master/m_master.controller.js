@@ -1,6 +1,6 @@
 var app = angular.module("myApp", ["ngMaterial", "angular-md5"]);
 app.controller(
-  "m_orderitemController",
+  "m_masterController",
   function (
     $scope,
     $location,
@@ -14,7 +14,7 @@ app.controller(
     md5
   ) {
     var vm = this;
-    $scope.show_centrix_collection = show_centrix_collection;
+
     $scope.xlsx2json = xlsx2json;
     $scope.migrate = migrate;
     $scope.mongo2table = mongo2table;
@@ -67,60 +67,24 @@ app.controller(
     vm.processing = false;
     $scope.module_subcat = module_subcat;
     $scope.itemcount = "";
-    vm.localdbpath= "mongodb://localhost:27017/orderitem";
+    vm.mdatabase = "master";
+    vm.localdbpath = "mongodb://localhost:27017/" + vm.mdatabase;
+    $scope.ana_collection_code = ana_collection_code;
+    $scope.ana_collection_name = ana_collection_name;
+    $scope.findvalue = findvalue;
+    $scope.renderTable3_color=renderTable3_color;
     getOrguid();
     function getOrguid() {
       $http.get("/org-config").then(function (success) {
         var orgSite = success.data.org;
         $scope.orguid = globalSetting.setting.orguid[orgSite];
-        // $scope.Local_DB = globalSetting.setting.url[orgSite];
+        $scope.iip = globalSetting.setting.url[orgSite];
         console.log($scope.orguid);
         // masterdetail("OrderCategoryType", 1);
         // masterdetail("BillingType", 2);
         // adjustCollection("SubCategory");
       });
     }
-    function show_centrix_collection(params) {
-      console.log(params);
-      vm.mfile=params;
-      $http
-      .post("/centrix/list_collection", {
-        mcollection: params,
-      })
-      .success(function (response) {
-        console.log(response.data);
-        vm.results_c1 = response.data;
-       $scope.itemcount=response.data.length;
-        renderTablec1("#table_c1");
-      });
-    }
-    function renderTablec1(mtable) {
-      // var tableSetting = new Tabulator(mtable, {
-      var tableSetting = {
-        // height: "600px",
-        virtualDomHoz: true,
-        // layout: "fitDataTable",
-        data: vm.results_c1, //load row data from array
-        autoColumns: true, //create columns from data field names
-        rowClick: function (e, row) {
-          console.log(row.getData());
-          show_detail(row.getData());
-        },
-
-        // layout: "fitColumns", //fit columns to width of table
-        // responsiveLayout: "hide", //hide columns that dont fit on the table
-        // tooltips: true, //show tool tips on cells
-        // addRowPos: "top", //when adding a new row, add it to the top of the table
-        // history: true, //allow undo and redo actions on the table
-        // pagination: "local", //paginate the data
-        // paginationSize: 20, //allow 7 rows per page of data
-        // movableColumns: true, //allow column order to be changed
-        // resizableRows: true, //allow row order to be changed
-      };
-
-      vm.table = new Tabulator(mtable, tableSetting);
-    }
- 
     function xlsx2json(mtable) {
       vm.showadd = true;
       // vm.selectedFile =document.getElementById('input').value;
@@ -180,6 +144,7 @@ app.controller(
     function save2db() {
       mdata = vm.results;
       $http
+        // .post("/insert_ordercategory/insertpt", {
         .post("/insert/insertpt", {
           filename: $scope.filename,
           jsondata: mdata,
@@ -188,11 +153,10 @@ app.controller(
         .success(function (response) {});
       $scope.notice = "import " + $scope.filename + " already";
     }
-      
     function showcollection() {
       $http
         .post("/local_data/list_collection", {
-          mcollection: "orderitem",
+          mcollection: vm.mdatabase,
           localdb: vm.localdbpath,
         })
         .success(function (response) {
@@ -247,9 +211,10 @@ app.controller(
           // console.log("coll", $scope.coll);
           vm.results3 = array;
           renderTable3("#table3");
+          ana_collection_code(vm.mfile);
+          ana_collection_name(vm.mfile);
         });
     }
-
     function renderTable3(mtable3) {
       console.log(mtable3);
       // var tableSetting = new Tabulator(mtable, {
@@ -259,28 +224,64 @@ app.controller(
         layout: "fitDataTable",
         data: vm.results3, //load row data from array
         autoColumns: true, //create columns from data field names
-        // rowClick: function (e, row) {
-        //   console.log(row.getData());
-        //   collectiondetail(row.getData());
-        // },
-
-        // layout: "fitColumns", //fit columns to width of table
-        // responsiveLayout: "hide", //hide columns that dont fit on the table
-        // tooltips: true, //show tool tips on cells
-        // addRowPos: "top", //when adding a new row, add it to the top of the table
-        // history: true, //allow undo and redo actions on the table
-        // pagination: "local", //paginate the data
-        // paginationSize: 20, //allow 7 rows per page of data
-        // movableColumns: true, //allow column order to be changed
-        // resizableRows: true, //allow row order to be changed
       };
       console.log(vm.results3);
       vm.table = new Tabulator(mtable3, tableSetting3);
     }
-     
+    function ana_collection_code(mfile) {
+      $http
+        .post("/local_data/collection_ana_code", {
+          mfile: mfile,
+          localdb: vm.localdbpath,
+        })
+        .success(function (data) {
+          $scope.manacode = data.data;
+          console.log($scope.manacode);
+        });
+    }
+    function ana_collection_name(mfile) {
+      $http
+        .post("/local_data/collection_ana_name", {
+          mfile: mfile,
+          localdb: vm.localdbpath,
+        })
+        .success(function (data) {
+          $scope.mananame = data.data;
+          console.log($scope.mananame);
+        });
+    }
+    function findvalue(params) {
+      console.log(params);
+      renderTable3_color("#table3",params);
+    }
+    function renderTable3_color(mtable3,mfield) {
+      // console.log(mtable3);
+      // console.log(mfield);
+      // var tableSetting = new Tabulator(mtable, {
+      var tableSetting3 = {
+        // height: "500px",
+        virtualDomHoz: true,
+        layout: "fitDataTable",
+        data: vm.results3, //load row data from array
+        autoColumns: true, //create columns from data field names
+        rowFormatter: function (row) {
+          // console.log(row.getData());
+          if(row.getData().CODE == mfield || row.getData().NAME == mfield){
+              row.getElement().style.backgroundColor = "#A6A6DF";
+          }
+        },
+        rowClick: function (e, row) {
+          console.log(row.getData());
+          // collectiondetail(row.getData());
+        },
+      };
+      console.log(vm.results3);
+      vm.table = new Tabulator(mtable3, tableSetting3);
+    }
+    //-----------------------
     function adjustCollection(mfile) {
-      // masterdetail("OrderCategoryType", 1);
-      // masterdetail("BillingType", 2);
+      masterdetail("OrderCategoryType", 1);
+      masterdetail("BillingType", 2);
       console.log("mfile", vm.mfile);
       $http
         .post("/local_data/collection_detail", {
@@ -340,9 +341,6 @@ app.controller(
       console.log(vm.results4);
       vm.table = new Tabulator(mtable4, tableSetting4);
     }
-
-
-        //--------------------------------------------
     function masterdetail(param, fileitem) {
       $http
         .post("/local_data/collection_detail", {
@@ -589,7 +587,6 @@ app.controller(
           // document.getElementById("myData").innerHTML = text;
         });
     }
-    //-----------------------
 
     function savenote(mloginid, mpassword, mnotename, mnotetype, mnotedetail) {
       if (mnotetype != "") {
@@ -711,9 +708,9 @@ app.controller(
                 var array = vm.results;
                 var mcchpilist = [];
                 for (let index = 0; index < array.length; index++) {
-                  const m_orderlist = array[index].chiefcomplaint;
+                  const m_masterlist = array[index].chiefcomplaint;
                   mcchpilist.push({
-                    chiefcomplaint: m_orderlist,
+                    chiefcomplaint: m_masterlist,
                   });
                 }
                 var mcode = $scope.user.code;

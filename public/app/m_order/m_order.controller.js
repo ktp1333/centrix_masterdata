@@ -67,6 +67,7 @@ app.controller(
     vm.processing = false;
     $scope.module_subcat=module_subcat;
     $scope.itemcount = '';
+    vm.localdbpath= "mongodb://localhost:27017/ordercategory";
     getOrguid();
     function getOrguid() {
       $http.get("/org-config").then(function (success) {
@@ -138,17 +139,20 @@ app.controller(
     function save2db() {
       mdata = vm.results;
       $http
-        .post("/insert_ordercategory/insertpt", {
+        // .post("/insert_ordercategory/insertpt", {
+          .post("/insert/insertpt", {
           filename: $scope.filename,
           jsondata: mdata,
+          localdb: vm.localdbpath,
         })
         .success(function (response) {});
       $scope.notice = "import " + $scope.filename + " already";
     }
     function showcollection() {
       $http
-        .post("/centrix_master/list_collection", {
+        .post("/local_data/list_collection", {
           mcollection: "ordercategory",
+          localdb: vm.localdbpath,
         })
         .success(function (response) {
           vm.results2 = response.data;
@@ -187,8 +191,9 @@ app.controller(
       vm.mfile = param.name;
       console.log("mfile", vm.mfile);
       $http
-        .post("/centrix_master/collection_detail", {
+        .post("/local_data/collection_detail", {
           mfile: vm.mfile,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           var array = data.data;
@@ -235,8 +240,9 @@ app.controller(
       masterdetail("BillingType", 2);
       console.log("mfile", vm.mfile);
       $http
-        .post("/centrix_master/collection_detail", {
+        .post("/local_data/collection_detail", {
           mfile: mfile,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           var array = data.data;
@@ -293,8 +299,9 @@ app.controller(
     }
     function masterdetail(param, fileitem) {
       $http
-        .post("/centrix_master/collection_detail", {
+        .post("/local_data/collection_detail", {
           mfile: param,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           if (fileitem == 1) {
@@ -328,7 +335,7 @@ app.controller(
       console.log("ORDERCATEGORYTYPE", ORDERCATEGORYTYPE);
       console.log("BILLINGTYPE", BILLINGTYPE);
       $http
-        .post("/centrix_master/updateordercat", {
+        .post("/local_data/updateordercat", {
           mfile: "OrderCategory",
           CODE: code,
           NAME: name,
@@ -336,6 +343,7 @@ app.controller(
           ORDERCATEGORYTYPE: ORDERCATEGORYTYPE,
           BILLINGTYPE: BILLINGTYPE,
           ISSUBCATEGORY: ISSUBCATEGORY,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           adjustCollection("OrderCategory");
@@ -346,9 +354,10 @@ app.controller(
       vm.processing = true;
       console.log("ID", ID);
       $http
-        .post("/centrix_master/delete_data", {
+        .post("/local_data/delete_data", {
           mfile: "OrderCategory",
           ID: ID,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           adjustCollection("OrderCategory");
@@ -359,9 +368,10 @@ app.controller(
       vm.processing = true;
       console.log("ID", ID);
       $http
-        .post("/centrix_master/delete_data", {
+        .post("/local_data/delete_data", {
           mfile: "SubCategory",
           ID: ID,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           adjustCollection("SubCategory");
@@ -422,7 +432,7 @@ app.controller(
       console.log("PARENTCATEGORYNAME", PARENTCATEGORYNAME);
       
       $http
-        .post("/centrix_master/updatesubordercat", {
+        .post("/local_data/updatesubordercat", {
           mfile: "SubCategory",
           CODE: code,
           NAME: name,
@@ -431,6 +441,7 @@ app.controller(
           BILLINGTYPE: BILLINGTYPE,
           // ISSUBCATEGORY: ISSUBCATEGORY,
           PARENTCATEGORYNAME: PARENTCATEGORYNAME,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           adjustCollection("SubCategory");
@@ -463,9 +474,10 @@ app.controller(
 
     function findordercat() {
       $http
-        .post("/centrix_master/find_ordercategories", {
+        .post("/local_data/find_ordercategories", {
           orguid: "569794170946a3d0d588efe6",
           name: vm.ordercat,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           var array = data.data;
@@ -478,8 +490,9 @@ app.controller(
     }
     function listOrdercategories() {
       $http
-        .post("/centrix_master/list_ordercategories", {
+        .post("/local_data/list_ordercategories", {
           orguid: "569794170946a3d0d588efe6",
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           var array = data.data;
@@ -492,9 +505,10 @@ app.controller(
     }
     function finddetail(ID) {
       $http
-        .post("/centrix_master/find_detail", {
+        .post("/local_data/find_detail", {
           orguid: "569794170946a3d0d588efe6",
           ID: ID,
+          localdb: vm.localdbpath,
         })
         .success(function (data) {
           $scope.itemdetail = data.data;
